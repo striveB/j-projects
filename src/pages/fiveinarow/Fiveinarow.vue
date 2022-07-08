@@ -1,6 +1,5 @@
 <script lang="ts" setup>
 import { reactive, ref } from 'vue'
-import { longestConsecutive } from '../../utils/number'
 type pieces = {
     x: number,
     y: number,
@@ -28,10 +27,12 @@ function init(){
             (_, x) => ({x, y})
         )
     )
+    console.log(checkerboard)
 }
 init()
 // 下棋操作
 function doClick(chess: pieces){
+    console.log(chess)
     if(chess.player){
         return
     }
@@ -41,32 +42,127 @@ function doClick(chess: pieces){
     } else {
         whiteChess.push(chess)
     }
-    if(xyJudge('x') || xyJudge('y')){
+    if(
+        crosswise(chess.x, chess.y, chess.player) || 
+        vertical(chess.x, chess.y, chess.player) || 
+        rightIncline(chess.x, chess.y, chess.player) || 
+        leftIncline(chess.x, chess.y, chess.player)
+    ){
         alert(`【${player.value === 1 ? '黑方' : '白方'}】胜利！`)
     }
     player.value = player.value === 1 ? 2 : 1
 }
 
-// 判断竖向是否胜利
-function xyJudge(axle: 'x' | 'y') {
-    let xList: rel = {}
-    const chess = player.value === 1 ? balckChess : whiteChess
-    chess.forEach(ch => {
-        if(!xList[ch[axle]]) {
-            xList[ch[axle]] = []
-        }
-        xList[ch[axle]].push(ch)
-    })
-    // 所有存在棋子的x轴
-    const xKeys = Object.keys(xList) as any as number[]
-    // 遍历x轴的棋子
-    for(let i = 0; i < xKeys.length; i++) {
-        let chessList = xList[xKeys[i]].map(ch => ch[axle === 'y' ? 'x' : 'y'])
-        if(longestConsecutive(chessList) >= 5){
-            return true;
+// 判断横向是否胜利
+function crosswise(x: number, y: number, player: number) {
+    let len = 1
+    let tempX: number = x
+    // 向左方查找
+    for (let i = 1; i <= 5; i++) {
+        tempX -= 1
+        if(tempX >= 0 && checkerboard[y][tempX].player === player) {
+            len += 1
+        } else {
+            break
         }
     }
-    return false;
+    tempX = x
+    // 向右方查找
+    for (let i = 1; i <= 5; i++) {
+        tempX += 1
+        if(tempX <= 14 && checkerboard[y][tempX].player === player) {
+            len += 1
+        } else {
+            break
+        }
+    }
+    return len >= 5
+}
+
+// 判断竖向是否胜利
+function vertical(x: number, y: number, player: number) {
+    let len = 1
+    let tempY: number = y
+    // 向上方查找
+    for (let i = 1; i <= 5; i++) {
+        tempY -= 1
+        if(tempY >= 0 && checkerboard[tempY][x].player === player) {
+            len += 1
+        } else {
+            break
+        }
+    }
+    tempY = y
+    // 向下方查找
+    for (let i = 1; i <= 5; i++) {
+        tempY += 1
+        if(tempY <= 14 && checkerboard[tempY][x].player === player) {
+            len += 1
+        } else {
+            break
+        }
+    }
+    return len >= 5
+}
+
+// 判断右斜方是否胜利
+function rightIncline(x: number, y: number, player: number) {
+    let len = 1
+    let tempX: number = x
+    let tempY: number = y
+    // 左上方查找
+    for (let i = 1; i <= 5; i++) {
+        tempX -= 1
+        tempY -= 1
+        if(tempX >= 0 && tempY >= 0 && checkerboard[tempY][tempX].player === player) {
+            len += 1
+        } else {
+            break
+        }
+    }
+    tempX = x
+    tempY = y
+    // 右下方查找
+    for (let i = 1; i <= 5; i++) {
+        tempX += 1
+        tempY += 1
+        if(tempX <= 14 && tempY <= 14 && checkerboard[tempY][tempX].player === player) {
+            len += 1
+        } else {
+            break
+        }
+    }
+    return len >= 5
+}
+
+// 判断左斜方是否胜利
+function leftIncline(x: number, y: number, player: number){
+    let len = 1
+    let tempX: number = x
+    let tempY: number = y
+    // 右上方查找
+    for (let i = 1; i <= 5; i++) {
+        tempX += 1
+        tempY -= 1
+        if(tempX <= 14 && tempY >= 0 && checkerboard[tempY][tempX].player === player) {
+            len += 1
+        } else {
+            break
+        }
+    }
+    tempX = x
+    tempY = y
+    // 左下方查找
+    for (let i = 1; i <= 5; i++) {
+        tempX -= 1
+        tempY += 1
+        if(tempX >= 0 && tempY <= 14 && checkerboard[tempY][tempX].player === player) {
+            len += 1
+        } else {
+            break
+        }
+    }
+    return len >= 5
 }
 
 
@@ -84,7 +180,9 @@ function xyJudge(axle: 'x' | 'y') {
                   @click="doClick(pieces)" 
                   :class="{'black': pieces.player === 1, 'white': pieces.player === 2}"
                   :key="pieces.x"
-                  ></td>
+                  >
+                  <!-- {{ pieces.x }},{{ pieces.y }} -->
+                  </td>
                 </tr>
             </table>
             <div class="side">
