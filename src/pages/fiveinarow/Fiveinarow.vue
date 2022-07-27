@@ -5,18 +5,21 @@ type pieces = {
     y: number,
     player?: number
 }
-
-type rel = {
-    [key: number]: pieces[]
-}
 // 当前玩家
 let player = ref(1)
+// 游戏是否结束
+let gameOver = ref(false)
 // 棋盘
 let checkerboard = reactive<pieces[][]>([])
 // 黑方所有棋子
 let balckChess: pieces[] = []
 // 白方所有棋子
 let whiteChess: pieces[] = []
+
+let activeChess = reactive<pieces>({
+    x: -1,
+    y: -1,
+})
 
 // 初始化棋盘
 function init(){
@@ -32,16 +35,17 @@ function init(){
 init()
 // 下棋操作
 function doClick(chess: pieces){
-    console.log(chess)
-    if(chess.player){
+    if(chess.player || checkGameOver()){
         return
     }
     chess.player = player.value
+    Object.assign(activeChess, chess)
     if(player.value === 1) {
         balckChess.push(chess)
     } else {
         whiteChess.push(chess)
     }
+    // 游戏判断
     if(
         crosswise(chess.x, chess.y, chess.player) || 
         vertical(chess.x, chess.y, chess.player) || 
@@ -49,10 +53,40 @@ function doClick(chess: pieces){
         leftIncline(chess.x, chess.y, chess.player)
     ){
         alert(`【${player.value === 1 ? '黑方' : '白方'}】胜利！`)
+        console.log(`【${player.value === 1 ? '黑方' : '白方'}】胜利！`)
+        gameOver.value = true
     }
     player.value = player.value === 1 ? 2 : 1
+    if(player.value === 2) {
+        // ai()
+    }
 }
 
+function checkGameOver(){
+    if(gameOver.value){
+        // alert(`【${player.value === 1 ? '黑方' : '白方'}】胜利！`)
+        return true
+    } else {
+        return false
+    }
+}
+
+function resetGame(){
+    checkerboard.forEach((y, index) => {
+        y.forEach(x => {
+            x.player = -1
+        })
+    })
+    console.log(checkerboard)
+}
+
+function ai(){
+    let y = 0
+    let x = 0
+    setTimeout(()=> {
+        doClick(checkerboard[y][x])
+    }, 500)
+}
 // 判断横向是否胜利
 function crosswise(x: number, y: number, player: number) {
     let len = 1
@@ -164,8 +198,6 @@ function leftIncline(x: number, y: number, player: number){
     }
     return len >= 5
 }
-
-
 </script>
 
 <template>
@@ -178,7 +210,7 @@ function leftIncline(x: number, y: number, player: number){
                   <td 
                   v-for="pieces in arr1" 
                   @click="doClick(pieces)" 
-                  :class="{'black': pieces.player === 1, 'white': pieces.player === 2}"
+                  :class="{'black': pieces.player === 1, 'white': pieces.player === 2, 'active': activeChess.x === pieces.x && activeChess.y === pieces.y}"
                   :key="pieces.x"
                   >
                   <!-- {{ pieces.x }},{{ pieces.y }} -->
@@ -187,6 +219,7 @@ function leftIncline(x: number, y: number, player: number){
             </table>
             <div class="side">
                 当前玩家: {{ player === 1 ? '黑方' : '白方' }}
+                <!-- <button @click="resetGame()">重新开始</button> -->
             </div>
         </div>
     </div>
@@ -225,6 +258,9 @@ function leftIncline(x: number, y: number, player: number){
             .white {
                 background-color: white;
             } 
+            .active {
+                border: 2px solid red;
+            }
         }
     }   
 }
