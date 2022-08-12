@@ -58,7 +58,7 @@
     function removeBg(index: number){
         if(!isRemove.value) return
         rel[index] = {
-            backgroundColor: '#313131',
+            backgroundColor: '#1b1f2e',
             boxShadow: '0 0 2px #000'
         }
     }
@@ -112,7 +112,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: #222222;
+    background-color: #091921;
     h1 { 
         margin-bottom: 10px;
         span { 
@@ -142,7 +142,7 @@
             height: 16px;
             margin: 2px;
             cursor: pointer;
-            background-color: #313131;
+            background-color: #1b1f2e;
             box-shadow: 0 0 2px #000;
             transition: 2s ease;
             &:hover {

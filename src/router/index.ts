@@ -6,14 +6,26 @@ const routes: RouteRecordRaw[] = [
         component: () => import('@/pages/Home.vue')
     },
     {
-        name: '五子棋',
-        path: '/five-chess',
-        component: () => import('@/pages/fiveinarow/Fiveinarow.vue')
-    },
-    {
-        name: '颜色追踪',
-        path: '/colors',
-        component: () => import('@/pages/color/Colors.vue')
+        name: '项目集',
+        path: '/projects',
+        component: () => import('@/pages/Projects.vue'),
+        children: [
+            {
+                name: '五子棋',
+                path: 'five-chess',
+                component: () => import('@/pages/fiveinarow/Fiveinarow.vue')
+            },
+            {
+                name: '颜色追踪',
+                path: 'colors',
+                component: () => import('@/pages/color/Colors.vue')
+            },
+            {
+                name: '炫酷时钟',
+                path: 'clock',
+                component: () => import('@/pages/clock/Clock.vue')
+            }
+        ]
     }
 ]
 const router = createRouter({

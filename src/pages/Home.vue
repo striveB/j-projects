@@ -1,14 +1,19 @@
 <template>
    <div class="body">
       <div class="projects">
-         <router-link to="/five-chess" custom v-slot="{ navigate }">
+         <router-link to="/projects/five-chess" custom v-slot="{ navigate }">
             <div @click="navigate" class="item">
                <span class="title"><el-icon><Aim /></el-icon>&nbsp;五子棋</span>
             </div>
          </router-link>
-         <router-link to="/colors" custom v-slot="{ navigate }">
+         <router-link to="/projects/colors" custom v-slot="{ navigate }">
             <div @click="navigate" class="item">
                <span class="title"><el-icon><Brush /></el-icon>&nbsp;颜色追踪</span>
+            </div>
+         </router-link>
+         <router-link to="/projects/clock" custom v-slot="{ navigate }">
+            <div @click="navigate" class="item">
+               <span class="title"><el-icon><Clock /></el-icon>&nbsp;炫酷时钟</span>
             </div>
          </router-link>
       </div>
