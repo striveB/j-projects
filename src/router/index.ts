@@ -24,6 +24,11 @@ const routes: RouteRecordRaw[] = [
                 name: '炫酷时钟',
                 path: 'clock',
                 component: () => import('@/pages/clock/Clock.vue')
+            },
+            {
+                name: '文字游戏',
+                path: 'text',
+                component: () => import('@/pages/text/Text.vue')
             }
         ]
     }

@@ -101,7 +101,7 @@
                         width: 4px;
                         height: 90px;
                         z-index: 11;
-                        background-color: #fff;
+                        background-color: #94c2f7;
                         border-radius: 6px 6px 0 0;
                     }
                 }

@@ -16,6 +16,11 @@
                <span class="title"><el-icon><Clock /></el-icon>&nbsp;炫酷时钟</span>
             </div>
          </router-link>
+         <router-link to="/projects/text" custom v-slot="{ navigate }">
+            <div @click="navigate" class="item">
+               <span class="title"><el-icon><WindPower /></el-icon>&nbsp;文字游戏</span>
+            </div>   
+         </router-link>
       </div>
    </div>
 </template>
@@ -40,6 +45,7 @@
          .title {
             display: flex;
             align-items: center;
+            line-height: 30px
          }
       }
    }

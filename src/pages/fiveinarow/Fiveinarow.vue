@@ -70,14 +70,13 @@ function checkGameOver(){
         return false
     }
 }
-
+let arr = reactive<number[]>([])
+arr = [1,2,4]
 function resetGame(){
-    checkerboard.forEach((y, index) => {
-        y.forEach(x => {
-            x.player = -1
-        })
-    })
-    console.log(checkerboard)
+    balckChess = []
+    whiteChess = []
+    init()
+    arr = [1,43,4]
 }
 
 function ai(){
@@ -202,7 +201,17 @@ function leftIncline(x: number, y: number, player: number){
 
 <template>
     <div class="five">
+        {{arr}}
+        <div v-for="a in arr" :key="a">
+            {{ a }}
+        </div>
         <div class="container">
+            <div class="header">
+                <div class="status">
+                    当前玩家: {{ player === 1 ? '黑方' : '白方' }}
+                </div>
+                <button @click="resetGame()">重新开始</button>
+            </div>
             <table class="table">
                 <!-- 渲染tr -->
                 <tr v-for="arr1, index in checkerboard" :key="index">
@@ -213,14 +222,10 @@ function leftIncline(x: number, y: number, player: number){
                   :class="{'black': pieces.player === 1, 'white': pieces.player === 2, 'active': activeChess.x === pieces.x && activeChess.y === pieces.y}"
                   :key="pieces.x"
                   >
-                  <!-- {{ pieces.x }},{{ pieces.y }} -->
+                  {{ pieces.player }}
                   </td>
                 </tr>
             </table>
-            <div class="side">
-                当前玩家: {{ player === 1 ? '黑方' : '白方' }}
-                <!-- <button @click="resetGame()">重新开始</button> -->
-            </div>
         </div>
     </div>
 </template>
@@ -235,6 +240,13 @@ function leftIncline(x: number, y: number, player: number){
     .container {
         margin: 0 auto;
         display: flex;
+        flex-direction: column;
+        .header { 
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
         .table {
             width: 730px;
             height: 730px;
