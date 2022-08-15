@@ -201,16 +201,12 @@ function leftIncline(x: number, y: number, player: number){
 
 <template>
     <div class="five">
-        {{arr}}
-        <div v-for="a in arr" :key="a">
-            {{ a }}
-        </div>
         <div class="container">
             <div class="header">
                 <div class="status">
                     当前玩家: {{ player === 1 ? '黑方' : '白方' }}
                 </div>
-                <button @click="resetGame()">重新开始</button>
+                <!-- <button @click="resetGame()">重新开始</button> -->
             </div>
             <table class="table">
                 <!-- 渲染tr -->
