@@ -30,7 +30,6 @@ function init(){
             (_, x) => ({x, y})
         )
     )
-    console.log(checkerboard)
 }
 init()
 // 下棋操作
@@ -53,7 +52,6 @@ function doClick(chess: pieces){
         leftIncline(chess.x, chess.y, chess.player)
     ){
         alert(`【${player.value === 1 ? '黑方' : '白方'}】胜利！`)
-        console.log(`【${player.value === 1 ? '黑方' : '白方'}】胜利！`)
         gameOver.value = true
     }
     player.value = player.value === 1 ? 2 : 1

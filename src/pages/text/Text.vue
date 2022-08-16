@@ -1,6 +1,6 @@
 <script lang="ts" setup>
     import draggable from "vuedraggable"
-    import { sort } from '@/utils/utils'
+    import { sort } from '../../utils/utils'
     import { reactive, watch } from 'vue'
     let texts = [
         '知男而退', '强人所男', 

@@ -21,6 +21,11 @@
                <span class="title"><el-icon><WindPower /></el-icon>&nbsp;文字游戏</span>
             </div>   
          </router-link>
+         <router-link to="/projects/buttons" custom v-slot="{ navigate }">
+            <div @click="navigate" class="item">
+               <span class="title"><el-icon><WindPower /></el-icon>&nbsp;按钮</span>
+            </div>   
+         </router-link>
       </div>
    </div>
 </template>

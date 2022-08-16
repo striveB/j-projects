@@ -3,6 +3,9 @@ const routes: RouteRecordRaw[] = [
     { 
         name: '首页',
         path: '/',
+        meta: {
+            title: '项目集'
+        },
         component: () => import('@/pages/Home.vue')
     },
     {
@@ -29,6 +32,11 @@ const routes: RouteRecordRaw[] = [
                 name: '文字游戏',
                 path: 'text',
                 component: () => import('@/pages/text/Text.vue')
+            },
+            {
+                name: '按钮',
+                path: 'buttons',
+                component: () => import('@/pages/buttons/Buttons.vue')
             }
         ]
     }
@@ -36,6 +44,16 @@ const routes: RouteRecordRaw[] = [
 const router = createRouter({
     routes,
     history: createWebHashHistory()
+})
+
+router.beforeEach((to, form, next) => {
+    const { name, meta } = to
+    if(meta && meta.title) {
+        window.document.title = meta.title as string
+    } else {
+        window.document.title = name as string
+    }
+    next()
 })
 
 export default router
