@@ -1,6 +1,11 @@
 <template>
    <div class="body">
       <div class="projects">
+         <router-link to="/projects/buttons" custom v-slot="{ navigate }">
+            <div @click="navigate" class="item">
+               <span class="title"><el-icon><Pointer /></el-icon>&nbsp;按钮</span>
+            </div>   
+         </router-link>
          <router-link to="/projects/five-chess" custom v-slot="{ navigate }">
             <div @click="navigate" class="item">
                <span class="title"><el-icon><Aim /></el-icon>&nbsp;五子棋</span>
@@ -19,11 +24,6 @@
          <router-link to="/projects/text" custom v-slot="{ navigate }">
             <div @click="navigate" class="item">
                <span class="title"><el-icon><WindPower /></el-icon>&nbsp;文字游戏</span>
-            </div>   
-         </router-link>
-         <router-link to="/projects/buttons" custom v-slot="{ navigate }">
-            <div @click="navigate" class="item">
-               <span class="title"><el-icon><WindPower /></el-icon>&nbsp;按钮</span>
             </div>   
          </router-link>
       </div>
