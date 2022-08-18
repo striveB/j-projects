@@ -4,12 +4,15 @@ let isOpen = ref(false)
 </script>
 
 <template>
-    <div class="btn open-close" @click="isOpen = !isOpen">
+    <div class="btn open-close" :class="{isOpen}" @click="isOpen = !isOpen">
         <div class="toggle" :class="{open: isOpen}"></div>
     </div>
 </template>
 <style lang="less" scoped>
 .open-close {
+    &.isOpen {
+        background-color: #e88b8b !important;
+    }
     .toggle {
         width: 100%;
         position: relative;
