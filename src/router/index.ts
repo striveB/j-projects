@@ -37,6 +37,11 @@ const routes: RouteRecordRaw[] = [
                 name: '按钮',
                 path: 'buttons',
                 component: () => import('@/pages/buttons/Buttons.vue')
+            },
+            {
+                name: '移动的小球',
+                path: 'moveball',
+                component: () => import('@/pages/moveBall/MoveBall.vue')
             }
         ]
     }

@@ -20,3 +20,15 @@ export function longestConsecutive(nums: Array<number>): number {
     res.push(len)
     return Math.max(...res)
 }
+
+
+// 获取指定范围的随机数
+export function createRandomNum(min: number, max: number, isInteger: boolean = false) {
+    let range = max - min;
+    let rand = Math.random();
+    let result = range * rand + min
+    if(isInteger){
+        return Math.floor(result)
+    }
+    return result;
+}
