@@ -15,7 +15,7 @@ const icons = [
   "IceTea",
   "Orange",
   "Cherry",
-  "ColdDrink",
+  // "ColdDrink",
   "Coffee",
   "Pear",
   "Grape",
@@ -49,7 +49,7 @@ function init() {
   let cha = 0; //落差
   items.length = 0;
   cons.length = 0;
-  for (let i = 1; i < 280; i++) {
+  for (let i = 1; i < 172; i++) {
     let lColNum = colNum - cha;
     let lRowNum = rowNum - cha;
     let row = Math.floor(rowI / lColNum);
