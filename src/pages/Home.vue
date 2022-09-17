@@ -43,6 +43,13 @@
           >
         </div>
       </router-link>
+      <router-link to="/projects/yang" custom v-slot="{ navigate }">
+        <div @click="navigate" class="item">
+          <span class="title"
+            ><el-icon><Pointer /></el-icon>&nbsp;牛了个B</span
+          >
+        </div>
+      </router-link>
     </div>
   </div>
 </template>

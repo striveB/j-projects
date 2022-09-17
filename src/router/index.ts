@@ -42,6 +42,11 @@ const routes: RouteRecordRaw[] = [
                 name: '移动的小球',
                 path: 'moveball',
                 component: () => import('@/pages/moveBall/MoveBall.vue')
+            },
+            {
+                name: '牛了个B',
+                path: 'yang',
+                component: () => import('@/pages/yang/Yang.vue')
             }
         ]
     }
