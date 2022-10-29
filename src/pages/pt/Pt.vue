@@ -151,12 +151,10 @@ function end(e: any) {
   e.target.style.opacity = 1;
 }
 function over(e: any) {
-  // console.log(e);
   e.preventDefault();
 }
 function checkGameOver() {
   result.value = data.blockStyles.every((block) => {
-    console.log(block);
     return (
       block.left === block.x && block.top === block.y && block.angle % 360 === 0
     );
