@@ -47,6 +47,11 @@ const routes: RouteRecordRaw[] = [
                 name: '牛了个B',
                 path: 'yang',
                 component: () => import('@/pages/yang/Yang.vue')
+            },
+            {
+                name: '拼图',
+                path: 'pt',
+                component: () => import('@/pages/pt/Pt.vue')
             }
         ]
     }

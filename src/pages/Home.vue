@@ -50,6 +50,13 @@
           >
         </div>
       </router-link>
+      <router-link to="/projects/pt" custom v-slot="{ navigate }">
+        <div @click="navigate" class="item">
+          <span class="title"
+            ><el-icon><Grid /></el-icon>&nbsp;拼图</span
+          >
+        </div>
+      </router-link>
     </div>
   </div>
 </template>
