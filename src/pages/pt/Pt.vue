@@ -63,15 +63,6 @@ type BlockStyle = {
   backgroundPositionY: string;
   backgroundImage: string; //背景图
 };
-let arr = [3, 4, 5, 8];
-for (var i = 400; i <= 900; i++) {
-  let is = arr.every((res) => {
-    return i % res === 0;
-  });
-  if (is) {
-    console.log(i);
-  }
-}
 const area = {
   width: "600px",
   height: "600px",
