@@ -3,7 +3,8 @@
   "private": true,
   "version": "0.0.0",
   "scripts": {
-    "dev": "vite --host 192.168.31.157",
+    "dev": "vite",
+    "dev-host": "vite --host 10.1.9.61",
     "build": "vue-tsc --noEmit && vite build",
     "preview": "vite preview",
     "test": "vitest"

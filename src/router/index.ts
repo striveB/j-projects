@@ -52,6 +52,16 @@ const routes: RouteRecordRaw[] = [
                 name: '拼图',
                 path: 'pt',
                 component: () => import('@/pages/pt/Pt.vue')
+            },
+            {
+                name: '数字滚动',
+                path: 'number',
+                component: () => import('@/pages/number/Number.vue')
+            },
+            {
+                name: '小汽车',
+                path: 'cars',
+                component: () => import('@/pages/cars/Cars.vue')
             }
         ]
     }

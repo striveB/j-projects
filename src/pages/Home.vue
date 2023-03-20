@@ -57,6 +57,20 @@
           >
         </div>
       </router-link>
+      <!-- <router-link to="/projects/number" custom v-slot="{ navigate }">
+        <div @click="navigate" class="item">
+          <span class="title"
+            ><el-icon><Odometer /></el-icon>&nbsp;数字滚动</span
+          >
+        </div>
+      </router-link> -->
+      <router-link to="/projects/cars" custom v-slot="{ navigate }">
+        <div @click="navigate" class="item">
+          <span class="title"
+            ><el-icon><Odometer /></el-icon>&nbsp;小汽车</span
+          >
+        </div>
+      </router-link>
     </div>
   </div>
 </template>
