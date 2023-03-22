@@ -109,7 +109,7 @@ const cars = reactive([
     justify-content: center;
     align-items: center;
     transform-style: preserve-3d;
-    transform: rotate(-15deg);
+    transform: rotate(-25deg);
     &::before {
       content: "";
       position: absolute;
