@@ -22,7 +22,6 @@ let gameState = ref<GameState>({
   state: "waiting",
   board: [],
 });
-// 八个颜色
 const numberColors = [
   "#666",
   "#FFC300",
@@ -239,13 +238,13 @@ function checkGame() {
         cursor: pointer;
         user-select: none;
         font-weight: bold;
+        font-size: 20px;
         &.isOpen {
           background: #fff;
         }
         &.isMine {
           background: rgb(254, 64, 64);
           color: #fff;
-          font-size: 18px;
           line-height: 45px;
         }
         .flag {
