@@ -102,12 +102,20 @@ export const routes: RouteRecordRaw[] = [
                 component: () => import('@/pages/nicepage/NicePage.vue')
             },
             {
-                name: 'clear-mine',
+                name: '扫雷',
                 path: 'clearMine',
                 meta:{
                     icon: 'Tickets',
                 },
                 component: () => import('@/pages/clearMine/Index.vue')
+            },
+            {
+                name: '俄罗斯方块',
+                path: 'tetris',
+                meta:{
+                    icon: 'Tickets',
+                },
+                component: () => import('@/pages/tetris/Index.vue')
             }
         ]
     }

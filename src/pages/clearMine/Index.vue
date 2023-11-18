@@ -14,9 +14,9 @@ interface GameState {
   state: "waiting" | "playing" | "won" | "lost";
   board: Block[][];
 }
-const WIDTH = 10;
-const HEIGHT = 10;
-const MINENUM = 5;
+const WIDTH = 15;
+const HEIGHT = 15;
+const MINENUM = 15;
 let gameState = ref<GameState>({
   isCreateMines: false,
   state: "waiting",
