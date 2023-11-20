@@ -93,14 +93,14 @@ export const routes: RouteRecordRaw[] = [
                 },
                 component: () => import('@/pages/cars/Cars.vue')
             },
-            {
-                name: 'nice-page',
-                path: 'nicepage',
-                meta:{
-                    icon: 'Tickets',
-                },
-                component: () => import('@/pages/nicepage/NicePage.vue')
-            },
+            // {
+            //     name: 'nice-page',
+            //     path: 'nicepage',
+            //     meta:{
+            //         icon: 'Tickets',
+            //     },
+            //     component: () => import('@/pages/nicepage/NicePage.vue')
+            // },
             {
                 name: '扫雷',
                 path: 'clearMine',
@@ -109,13 +109,29 @@ export const routes: RouteRecordRaw[] = [
                 },
                 component: () => import('@/pages/clearMine/Index.vue')
             },
+            // {
+            //     name: '俄罗斯方块',
+            //     path: 'tetris',
+            //     meta:{
+            //         icon: 'Tickets',
+            //     },
+            //     component: () => import('@/pages/tetris/Index.vue')
+            // }
             {
-                name: '俄罗斯方块',
-                path: 'tetris',
+                name: '2048',
+                path: '2048',
                 meta:{
                     icon: 'Tickets',
                 },
-                component: () => import('@/pages/tetris/Index.vue')
+                component: () => import('@/pages/2048/Index.vue')
+                // {
+                //     name: '俄罗斯方块',
+                //     path: 'tetris',
+                //     meta:{
+                //         icon: 'Tickets',
+                //     },
+                //     component: () => import('@/pages/tetris/Index.vue')
+                // }
             }
         ]
     }
