@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { reactive, computed, watch } from "vue";
+import { reactive, computed, ref } from "vue";
 type Tile = {
   id: number,
   x: number;
@@ -17,14 +17,14 @@ type Logic = {
 let tiles = reactive<Tile[]>([
   {
     id: Math.random(),
-    x: 2,
+    x: 1,
     y: 1,
     value: 2,
   },
   {
     id: Math.random(),
-    x: 1,
-    y: 2,
+    x: 2,
+    y: 3,
     value: 2,
   },
 ]);
@@ -71,7 +71,7 @@ function move(keyCode: string) {
   let isChange = false;
   for (let i = 1; i <= 4; i++) {
     let tiles = getTiles(info.direction, i);
-    tiles.sort((a, b) =>  (a[info.moveTo] - b[info.moveTo]) * info.sort);
+    tiles.sort((a, b) => (a[info.moveTo] - b[info.moveTo]) * info.sort);
     let num = info.num;
     tiles.forEach((tile, index) => {
       if(tile[info.moveTo] !== num) {
@@ -79,14 +79,12 @@ function move(keyCode: string) {
       }
       tile[info.moveTo] = num;
       num += info.sort
-      if(index > 0 && tile.value === tiles[index - 1].value && !tile.hide) {
-        // setTimeout(() => {
-          tiles[index - 1].value += tile.value;
-          tiles[index - 1].id = Math.random();
-          // 删除当前棋子
-          tile.hide = true
-          num -= info.sort
-        // }, 100)
+      if(index > 0 && tile.value === tiles[index - 1].value && !tiles[index - 1].hide && !tile.hide) {
+        tiles[index - 1].value += tile.value;
+        // tiles[index - 1].id = Math.random();
+        // 删除当前棋子
+        tile.hide = true
+        num -= info.sort
         isChange = true;
       }
     });
@@ -95,26 +93,34 @@ function move(keyCode: string) {
     setTimeout(addTile, 130)
   }
 }
-// 添加新的棋子
+// 随机位置添加新的棋子
 function addTile() {
+  let pos = []
   for(let i = 4; i > 0; i--) {
     for(let j = 4; j > 0; j--) {
       let tile = tiles.find(tile => tile.x === i && tile.y === j && !tile.hide);
       if(!tile) {
-        tiles.push({
-          id: Math.random(),
-          x: i,
-          y: j,
-          value: Math.random() > 0.8 ? 2 : 4,
-        });
-        return;
+        pos.push([i, j])
       }
     }
   }
+  pos.sort(() => Math.random() - 0.5)
+  tiles.push({
+    id: Math.random(),
+    x: pos[0][0],
+    y: pos[0][1],
+    value: Math.random() > 0.2 ? 2 : 4,
+  });
 }
 const tilesList = computed(() => {
   return tiles.filter(tile => !tile.hide)
 })
+function resetMerge(tile: Tile) {
+  console.log('resetMerge', tile)
+  // if(tile.hide) {
+  //   tile.id = Math.random();
+  // }
+}
 </script>
 <template>
   <div class="game-2048">
@@ -124,48 +130,55 @@ const tilesList = computed(() => {
         </div>
       </div>
       <div class="tiles">
-        <Transition name="slide-fade" v-for="tile in tilesList" :key="tile.id">
+        <!-- <Transition name="bounce" v-for="tile in tilesList"> -->
           <div 
           :class="['tile', 
             `tile-position-${tile.x}-${tile.y}`, 
             `tile-${tile.value}`]"
+          :key="tile.id"
+          v-for="tile in tilesList"
+          @transitionend="resetMerge(tile)"
           >
             {{ tile.value }}
           </div>
-        </Transition>
+        <!-- </Transition> -->
       </div>
     </div>
   </div>
 </template>
+<style>
+  .bounce-enter-active {
+    animation: bounce-in 0.3s;
+  }
+  /* .bounce-leave-active {
+    animation: bounce-in 0.5s reverse;
+  } */
+  @keyframes bounce-in {
+    0% {
+      /* transform: scale(0); */
+      /* scale: 0; */
+      font-size: 40px;
+    }
+    50% {
+      /* transform: scale(1.15); */
+      /* scale: 1.1; */
+      font-size: 60px;
+    }
+    100% {
+      /* transform: scale(1); */
+      /* scale: 1; */
+      font-size: 55px;
+    }
+  }
+</style>
 <style scoped lang="less">
-  /*
-    进入和离开动画可以使用不同
-    持续时间和速度曲线。
-  */
-  .slide-fade-enter-active {
-    transition: all 0.3s ease-out;
-  }
-
-  .slide-fade-leave-active {
-    transition: all 0.8s cubic-bezier(1, 0.5, 0.8, 1);
-  }
-
-  .slide-fade-enter-from,
-  .slide-fade-leave-to {
-    transform: translateX(20px);
-    opacity: 0;
-  }
-
-  // .v-enter-from,
-  // .v-leave-to {
-  //   opacity: 0;
-  // }
   .game-2048 {
     width: 100%;
     height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
     .game-container {
       width: 500px;
       height: 500px;
